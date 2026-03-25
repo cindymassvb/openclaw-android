@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 重试按钮：ripple + 描边圆角背景 -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#407B5CF0">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <stroke android:width="1.5dp" android:color="#7B5CF0" />
+            <solid android:color="#1A7B5CF0" />
+        </shape>
+    </item>
+</ripple>

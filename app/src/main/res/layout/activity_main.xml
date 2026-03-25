@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_deep"
+    android:orientation="vertical">
+
+    <!-- ══ Header ══════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/header_bg"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="8dp"
+        android:minHeight="56dp"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="14dp"
+            android:text="🐾  OpenClaw"
+            android:textColor="@color/text_primary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="4dp">
+            <View
+                android:id="@+id/statusDot"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_green"
+                android:layout_marginEnd="5dp" />
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status_ready"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- 历史记录 -->
+        <ImageButton
+            android:id="@+id/btnHistory"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@drawable/ic_history"
+            android:tint="@color/text_secondary"
+            android:contentDescription="历史记录"
+            android:padding="9dp" />
+
+        <!-- 新对话 -->
+        <ImageButton
+            android:id="@+id/btnNewChat"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@drawable/ic_new_chat"
+            android:tint="@color/text_secondary"
+            android:contentDescription="@string/cd_new_chat"
+            android:padding="9dp" />
+
+        <!-- 设置 -->
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@drawable/ic_settings"
+            android:tint="@color/text_secondary"
+            android:contentDescription="@string/cd_settings"
+            android:padding="9dp" />
+
+    </LinearLayout>
+
+    <!-- ══ Message list ═════════════════════════════════════════════════════ -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:scrollbarStyle="outsideInset" />
+
+        <LinearLayout
+            android:id="@+id/emptyState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🐾"
+                android:textSize="64sp"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_title"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/empty_subtitle"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- ══ 附件预览条 ════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/attachmentBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_card"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvAttachName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginEnd="6dp"
+            android:maxLines="1"
+            android:ellipsize="middle" />
+
+        <ImageButton
+            android:id="@+id/btnClearAttach"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:tint="@color/text_hint"
+            android:contentDescription="@string/cd_clear_attach"
+            android:padding="6dp" />
+
+    </LinearLayout>
+
+    <!-- ══ 输入区 ════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/inputContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_card"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="12dp"
+        android:elevation="8dp">
+
+        <ImageButton
+            android:id="@+id/btnAttach"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/ripple_circle"
+            android:src="@drawable/ic_attach"
+            android:tint="@color/text_secondary"
+            android:contentDescription="@string/cd_attach"
+            android:padding="10dp"
+            android:layout_marginEnd="2dp" />
+
+        <EditText
+            android:id="@+id/etMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/input_bg"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="11dp"
+            android:paddingBottom="11dp"
+            android:hint="输入消息…"
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
+            android:textSize="15sp"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLines="5"
+            android:minHeight="44dp" />
+
+        <ImageButton
+            android:id="@+id/btnSend"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/btn_send_bg"
+            android:src="@drawable/ic_send"
+            android:contentDescription="@string/cd_send"
+            android:padding="11dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.Openclaw" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent_purple</item>
+        <item name="colorPrimaryVariant">@color/accent_purple_dim</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_cyan</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface2</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:colorBackground">@color/bg_deep</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="toolbarStyle">@style/Widget.Openclaw.Toolbar</item>
+    </style>
+
+    <style name="Theme.Openclaw" parent="Base.Theme.Openclaw" />
+
+    <style name="Theme.Openclaw.Splash" parent="Base.Theme.Openclaw">
+        <item name="android:windowBackground">@color/bg_deep</item>
+    </style>
+
+    <style name="Widget.Openclaw.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/bg_card</item>
+        <item name="titleTextColor">@color/text_primary</item>
+    </style>
+
+</resources>

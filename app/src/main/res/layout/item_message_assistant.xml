@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Assistant message: 左对齐，头像 + 名字 + 气泡 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="top"
+    android:paddingStart="10dp"
+    android:paddingEnd="54dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="2dp">
+
+    <!-- 头像 -->
+    <TextView
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:text="🐾"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="7dp" />
+
+    <!-- 名字 + 气泡 竖向排列 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 名字标签 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/assistant_name"
+            android:textColor="@color/accent_purple"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+            android:layout_marginStart="2dp" />
+
+        <!-- 消息气泡 -->
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bubble_assistant"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.45"
+            android:textIsSelectable="true" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">OpenClaw</string>
+    <string name="settings_title">设置</string>
+    <string name="action_settings">设置</string>
+    <string name="app_version">v1.0.0</string>
+    <string name="assistant_name">小飞</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_send">发送</string>
+    <string name="cd_stop">停止生成</string>
+    <string name="cd_new_chat">新对话</string>
+    <string name="cd_settings">设置</string>
+    <string name="cd_copy_device_id">复制设备 ID</string>
+    <string name="cd_clear_url">清除地址</string>
+    <string name="cd_attach">上传文件</string>
+    <string name="cd_clear_attach">取消附件</string>
+
+    <!-- Status -->
+    <string name="status_ready">就绪</string>
+    <string name="status_requesting">请求中…</string>
+    <string name="status_connected">已连接</string>
+    <string name="status_error">出错</string>
+
+    <!-- Empty state -->
+    <string name="empty_title">小飞 · AI 助手</string>
+    <string name="empty_subtitle">输入消息开始对话</string>
+
+    <!-- Toast -->
+    <string name="toast_copied">已复制</string>
+    <string name="toast_device_id_copied">设备 ID 已复制</string>
+    <string name="toast_settings_saved">✓ 设置已保存</string>
+    <string name="toast_attach_too_large">文件过大（最大 10 MB）</string>
+</resources>

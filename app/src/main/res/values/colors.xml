@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Backgrounds ──────────────────────────────────── -->
+    <color name="bg_deep">#0D0D1A</color>
+    <color name="bg_card">#13132A</color>
+    <color name="surface">#1A1A35</color>
+    <color name="surface2">#22224A</color>
+
+    <!-- ── Accents ──────────────────────────────────────── -->
+    <color name="accent_purple">#7B5CF0</color>
+    <color name="accent_purple_dim">#4A3891</color>
+    <color name="accent_blue">#4A90E2</color>
+    <color name="accent_cyan">#00D4FF</color>
+
+    <!-- ── Status dots ──────────────────────────────────── -->
+    <color name="status_green">#22C55E</color>
+    <color name="status_yellow">#F59E0B</color>
+    <color name="status_red">#EF4444</color>
+
+    <!-- ── Text ─────────────────────────────────────────── -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#9999BB</color>
+    <color name="text_hint">#555580</color>
+
+    <!-- ── Legacy ───────────────────────────────────────── -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
