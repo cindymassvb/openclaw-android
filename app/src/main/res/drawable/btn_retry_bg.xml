@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 重试按钮：ripple + 描边圆角背景 -->
+
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="#407B5CF0">
     <item android:id="@android:id/mask">

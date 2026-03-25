@@ -27,7 +27,6 @@ public class SplashActivity extends AppCompatActivity {
         TextView tagline   = findViewById(R.id.tagline);
         View dotsContainer = findViewById(R.id.dotsContainer);
 
-        // Entrance animations
         logoContainer.setScaleX(0.3f);
         logoContainer.setScaleY(0.3f);
         logoContainer.setAlpha(0f);

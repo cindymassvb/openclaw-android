@@ -18,7 +18,6 @@ import io.noties.markwon.Markwon;
 
 public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // payload 常量：仅刷新文本，不重建整个 item（消除流式输出闪烁）
     public static final Object PAYLOAD_TEXT = new Object();
 
     private static final int TYPE_USER      = 0;
@@ -48,13 +47,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    // ── 带 payload 的快速更新（仅文本，不闪烁）──────────────────────────────
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder,
                                  int pos,
                                  @NonNull List<Object> payloads) {
         if (!payloads.isEmpty()) {
-            // 快速路径：只更新文字，避免整个 item 重建产生闪烁
             Message msg = messages.get(pos);
             if (holder instanceof AssistantVH) {
                 ((AssistantVH) holder).updateText(msg);
@@ -79,7 +76,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemCount() { return messages.size(); }
 
-    // ─── User bubble ──────────────────────────────────────────────────────────
     static class UserVH extends RecyclerView.ViewHolder {
         final TextView tvContent;
 
@@ -97,7 +93,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    // ─── Assistant bubble ─────────────────────────────────────────────────────
     class AssistantVH extends RecyclerView.ViewHolder {
         final TextView tvContent;
 
@@ -119,11 +114,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void updateText(Message msg) {
             if (msg.isStreaming()) {
-                // 流式中：纯文本，不渲染 Markdown，避免频繁渲染造成闪烁
                 String content = msg.getContent();
                 tvContent.setText(content.isEmpty() ? "●   ●   ●" : content);
             } else {
-                // 完成后：渲染 Markdown
                 String content = msg.getContent();
                 if (content.isEmpty()) {
                     tvContent.setText("");
@@ -134,7 +127,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    // ─── Helper ───────────────────────────────────────────────────────────────
     private static void copyToClipboard(Context ctx, String text) {
         ClipboardManager cm = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
         if (cm != null) {

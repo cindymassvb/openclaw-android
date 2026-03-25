@@ -249,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
         attachmentBar.setVisibility(View.GONE);
     }
 
-    // ── 发送 ─────────────────────────────────────────────────────────────────
 
     private void handleSend() {
         String text = etMessage.getText().toString().trim();
@@ -348,7 +347,6 @@ public class MainActivity extends AppCompatActivity {
         currentConvId = UUID.randomUUID().toString();
     }
 
-    // ── ★ 流式保活：启动/停止前台 Service + 唤醒锁 ───────────────────────────
     private void setStreaming(boolean streaming) {
         isStreaming = streaming;
         btnSend.setImageResource(streaming ? R.drawable.ic_stop : R.drawable.ic_send);
@@ -356,10 +354,8 @@ public class MainActivity extends AppCompatActivity {
         btnAttach.setEnabled(!streaming);
 
         if (streaming) {
-            // 开始流式：启动前台 Service，让系统认为进程正在进行重要工作，不杀它
             ChatForegroundService.start(this);
         } else {
-            // 完成/停止：关闭前台 Service，释放唤醒锁
             ChatForegroundService.stop(this);
         }
     }
@@ -420,7 +416,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if (apiClient != null) apiClient.cancel();
-        // 确保 Service 被关闭
         ChatForegroundService.stop(this);
         super.onDestroy();
     }

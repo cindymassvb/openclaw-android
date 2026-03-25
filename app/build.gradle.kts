@@ -55,6 +55,5 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.bouncycastle:bcprov-jdk15on:1.70")
-    // Markdown 渲染
     implementation("io.noties.markwon:core:4.6.2")
 }

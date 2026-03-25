@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- API 23+ 覆盖：强制深色状态栏图标 -->
+    
     <style name="Theme.Openclaw" parent="Base.Theme.Openclaw">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>

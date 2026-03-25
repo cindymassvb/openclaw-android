@@ -53,16 +53,13 @@ public class SettingsActivity extends AppCompatActivity {
         View     clearUrlBtn = findViewById(R.id.urlClearBtn);
         TextView tvVersion   = findViewById(R.id.tvVersion);
 
-        // 版本号
         tvVersion.setText(getString(R.string.app_name) + " " + getString(R.string.app_version));
 
-        // 加载已保存设置
         SharedPreferences p = getSharedPreferences("openclaw_prefs", MODE_PRIVATE);
         etUrl.setText(p.getString("server_url", ""));
         etToken.setText(p.getString("api_token", ""));
         etModel.setText(p.getString("model", "openclaw"));
 
-        // URL 清除按钮
         String savedUrl = p.getString("server_url", "");
         clearUrlBtn.setVisibility(savedUrl.isEmpty() ? View.GONE : View.VISIBLE);
         clearUrlBtn.setOnClickListener(v -> etUrl.setText(""));
@@ -74,7 +71,6 @@ public class SettingsActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {}
         });
 
-        // 设备 ID
         String deviceId = apiClient.getDeviceId();
         tvDeviceId.setText(deviceId != null && !deviceId.isEmpty() ? deviceId : "—");
         findViewById(R.id.btnCopyDeviceId).setOnClickListener(v -> {
@@ -86,17 +82,13 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // 获取模型列表
         findViewById(R.id.btnFetchModels).setOnClickListener(v -> fetchModels());
 
-        // 打开控制台
         findViewById(R.id.btnOpenConsole).setOnClickListener(v -> openConsole());
 
-        // 保存
         findViewById(R.id.btnSave).setOnClickListener(v -> save());
     }
 
-    // ── 从服务器获取模型列表 ──────────────────────────────────────────────────
     private void fetchModels() {
         String url   = etUrl.getText()   != null ? etUrl.getText().toString().trim()   : "";
         String token = etToken.getText() != null ? etToken.getText().toString().trim() : "";
@@ -139,7 +131,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-    // ── 在浏览器中打开控制台 ──────────────────────────────────────────────────
     private void openConsole() {
         String url = etUrl.getText() != null ? etUrl.getText().toString().trim() : "";
         if (url.isEmpty()) { etUrl.setError("请先填写服务器地址"); return; }
@@ -151,7 +142,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    // ── 保存 ─────────────────────────────────────────────────────────────────
     private void save() {
         String url   = etUrl.getText()   != null ? etUrl.getText().toString().trim()   : "";
         String token = etToken.getText() != null ? etToken.getText().toString().trim() : "";

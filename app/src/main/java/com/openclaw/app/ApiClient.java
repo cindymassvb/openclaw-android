@@ -47,12 +47,11 @@ public class ApiClient {
         "operator.admin", "operator.approvals", "operator.pairing"
     };
 
-    // ── WebSocket 保活参数 ────────────────────────────────────────────────────
-    /** OkHttp 层 ping 间隔（秒）：底层 TCP keepalive，防止 NAT/防火墙超时断连 */
+    
     private static final long WS_PING_INTERVAL_SEC = 25;
-    /** 最大重连次数 */
+    
     private static final int  MAX_RETRY = 3;
-    /** 重连基础延迟（ms），指数退避：500 → 1000 → 2000 */
+    
     private static final long RETRY_BASE_MS = 500;
 
     private static final String PREF_NAME  = "openclaw_device";
@@ -60,9 +59,6 @@ public class ApiClient {
     private static final String PREF_PUB   = "device_public_key";
     private static final String PREF_DEVID = "device_id";
 
-    // ── 固定设备密钥（开发用）────────────────────────────────────────────────
-    // 填入从 adb 读出的 device_private_key 值，即可让重装后保持相同设备 ID。
-    // 如果不需要固定，把 HARDCODED_SEED 留为空字符串 ""。
     private static final String HARDCODED_SEED = ""; // 硬编码风险较高，留空以改为运行时生成
 
     private final OkHttpClient  httpClient;
@@ -75,7 +71,6 @@ public class ApiClient {
     private byte[] pubKeyBytes;
     private String deviceId;
 
-    // ── 附件 ─────────────────────────────────────────────────────────────────
     public static class Attachment {
         public final String name;
         public final String mimeType;
@@ -97,13 +92,11 @@ public class ApiClient {
         }
     }
 
-    // ── 模型列表回调 ──────────────────────────────────────────────────────────
     public interface ModelsCallback {
         void onSuccess(List<String> models);
         void onError(String error);
     }
 
-    // ── 构造 ──────────────────────────────────────────────────────────────────
     public ApiClient(Context context) {
         this.context = context;
         loadOrCreateDeviceKey();
@@ -112,7 +105,6 @@ public class ApiClient {
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(0,  TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
-            // ★ 关键：OkHttp 层 WebSocket ping，防止路由器/NAT 超时断连
             .pingInterval(WS_PING_INTERVAL_SEC, TimeUnit.SECONDS);
 
         try {
@@ -129,21 +121,16 @@ public class ApiClient {
         httpClient = builder.build();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  设备密钥
-    // ══════════════════════════════════════════════════════════════════════════
 
     private void loadOrCreateDeviceKey() {
         SharedPreferences p = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 
-        // 如果填了硬编码密钥，直接用它（重装 App 后也保持同一设备 ID）
         if (!HARDCODED_SEED.isEmpty()) {
             try {
                 seed = base64UrlDecode(HARDCODED_SEED);
                 Ed25519PrivateKeyParameters priv = new Ed25519PrivateKeyParameters(seed, 0);
                 pubKeyBytes = priv.generatePublicKey().getEncoded();
                 deviceId = sha256Hex(pubKeyBytes);
-                // 同步写入 SharedPreferences，方便调试时用 Settings 界面复制
                 p.edit()
                     .putString(PREF_PRIV,  HARDCODED_SEED)
                     .putString(PREF_PUB,   base64UrlEncode(pubKeyBytes))
@@ -185,9 +172,6 @@ public class ApiClient {
         }
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  签名
-    // ══════════════════════════════════════════════════════════════════════════
 
     private String computeSignature(byte[] keySeed, String message) throws Exception {
         Ed25519PrivateKeyParameters privKey = new Ed25519PrivateKeyParameters(keySeed, 0);
@@ -204,9 +188,6 @@ public class ApiClient {
             String.join(",", SCOPES), String.valueOf(signedAtMs), t, nonce);
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  工具
-    // ══════════════════════════════════════════════════════════════════════════
 
     private String sha256Hex(byte[] data) throws Exception {
         byte[] hash = MessageDigest.getInstance("SHA-256").digest(data);
@@ -268,9 +249,6 @@ public class ApiClient {
         return params;
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  获取模型列表（通过 WebSocket，认证后查询）
-    // ══════════════════════════════════════════════════════════════════════════
 
     public void fetchModels(String baseUrl, String token, ModelsCallback cb) {
         final String wsUrl      = buildWsUrl(baseUrl, token);
@@ -375,9 +353,6 @@ public class ApiClient {
         }).start();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  测试连接
-    // ══════════════════════════════════════════════════════════════════════════
 
     public interface TestCallback {
         void onResult(boolean success, String message);
@@ -458,9 +433,6 @@ public class ApiClient {
         }).start();
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  聊天（流式 + 附件 + 自动重连）
-    // ══════════════════════════════════════════════════════════════════════════
 
     public void chat(String baseUrl, String token, String model,
                      List<Message> messages, Attachment attachment, StreamCallback cb) {
@@ -472,13 +444,11 @@ public class ApiClient {
                                 StreamCallback cb, int retryCount) {
         cancel();
 
-        // 取最后一条用户消息
         String userMsgText = "";
         for (int i = messages.size() - 1; i >= 0; i--) {
             if (messages.get(i).isUser()) { userMsgText = messages.get(i).getContent(); break; }
         }
 
-        // 处理附件
         final String finalMsg;
         final JSONArray attachmentsJson = new JSONArray();
         if (attachment != null) {
@@ -512,7 +482,6 @@ public class ApiClient {
         final String finalToken = token != null ? token.trim() : "";
         final int    retry      = retryCount;
 
-        // 保存重连所需参数
         final String  savedBaseUrl   = baseUrl;
         final String  savedToken     = token;
         final String  savedModel     = model;
@@ -641,10 +610,8 @@ public class ApiClient {
                     if (!completed) {
                         completed = true;
                         if (buf.length() > 0) {
-                            // 已有内容：当作完成处理
                             cb.onComplete();
                         } else {
-                            // 没有任何内容且未预期关闭：尝试重连
                             scheduleRetry(savedBaseUrl, savedToken, savedModel,
                                 savedMsgs, savedAtt, cb, retry, code, reason);
                         }
@@ -659,10 +626,8 @@ public class ApiClient {
                     Log.w(TAG, "WS failure (retry=" + retry + "): " + m);
 
                     if (buf.length() > 0) {
-                        // 已有部分内容就当完成
                         cb.onComplete();
                     } else {
-                        // 没有内容：重连
                         scheduleRetry(savedBaseUrl, savedToken, savedModel,
                             savedMsgs, savedAtt, cb, retry, -1, m);
                     }
@@ -670,7 +635,6 @@ public class ApiClient {
             });
     }
 
-    // ── 重连调度 ─────────────────────────────────────────────────────────────
 
     private void scheduleRetry(String baseUrl, String token, String model,
                                 List<Message> messages, Attachment attachment,
@@ -686,7 +650,6 @@ public class ApiClient {
         long delayMs = RETRY_BASE_MS * (1L << prevRetry); // 指数退避: 500/1000/2000ms
         Log.d(TAG, "Retry " + nextRetry + "/" + MAX_RETRY + " in " + delayMs + "ms");
 
-        // 通知 UI 正在重连
         cb.onToken("\n\n🔄 连接中断，正在重连（" + nextRetry + "/" + MAX_RETRY + "）…");
 
         mainHandler.postDelayed(() ->
@@ -695,9 +658,6 @@ public class ApiClient {
         );
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  内容提取
-    // ══════════════════════════════════════════════════════════════════════════
 
     private String extractTextFromContent(JSONObject message) {
         if (message == null) return "";
@@ -715,9 +675,6 @@ public class ApiClient {
         return message.optString("content", "");
     }
 
-    // ══════════════════════════════════════════════════════════════════════════
-    //  取消
-    // ══════════════════════════════════════════════════════════════════════════
 
     public void cancel() {
         if (activeWs != null) {

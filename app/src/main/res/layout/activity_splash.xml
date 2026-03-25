@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_deep">
 
-    <!-- 背景光晕 -->
+    
     <View
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
 
-    <!-- Logo + 标题 -->
+    
     <LinearLayout
         android:id="@+id/logoContainer"
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
 
     </LinearLayout>
 
-    <!-- Tagline -->
+    
     <TextView
         android:id="@+id/tagline"
         android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- 底部加载点 -->
+    
     <LinearLayout
         android:id="@+id/dotsContainer"
         android:layout_width="wrap_content"

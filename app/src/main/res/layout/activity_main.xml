@@ -7,7 +7,7 @@
     android:background="@color/bg_deep"
     android:orientation="vertical">
 
-    <!-- ══ Header ══════════════════════════════════════════════════════════ -->
+    
     <LinearLayout
         android:id="@+id/headerBar"
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- 历史记录 -->
+        
         <ImageButton
             android:id="@+id/btnHistory"
             android:layout_width="42dp"
@@ -62,7 +62,7 @@
             android:contentDescription="历史记录"
             android:padding="9dp" />
 
-        <!-- 新对话 -->
+        
         <ImageButton
             android:id="@+id/btnNewChat"
             android:layout_width="42dp"
@@ -73,7 +73,7 @@
             android:contentDescription="@string/cd_new_chat"
             android:padding="9dp" />
 
-        <!-- 设置 -->
+        
         <ImageButton
             android:id="@+id/btnSettings"
             android:layout_width="42dp"
@@ -86,7 +86,7 @@
 
     </LinearLayout>
 
-    <!-- ══ Message list ═════════════════════════════════════════════════════ -->
+    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -138,7 +138,7 @@
 
     </FrameLayout>
 
-    <!-- ══ 附件预览条 ════════════════════════════════════════════════════════ -->
+    
     <LinearLayout
         android:id="@+id/attachmentBar"
         android:layout_width="match_parent"
@@ -175,7 +175,7 @@
 
     </LinearLayout>
 
-    <!-- ══ 输入区 ════════════════════════════════════════════════════════════ -->
+    
     <LinearLayout
         android:id="@+id/inputContainer"
         android:layout_width="match_parent"

@@ -4,12 +4,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <!-- 前台 Service：防止系统在后台杀死 WebSocket 连接 -->
+    
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <!-- 唤醒锁：保持 CPU 运行直到回复完成 -->
+    
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- 通知（Android 13+）：前台 Service 需要显示通知 -->
+    
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -53,7 +53,7 @@
             android:screenOrientation="portrait"
             android:label="历史对话" />
 
-        <!-- 前台 Service：流式回复时保持进程不被杀 -->
+        
         <service
             android:name=".ChatForegroundService"
             android:exported="false"

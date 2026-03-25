@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Header 背景：深色底 + 底部 1dp 紫色描边
-    使用 layer-list 模拟 bottom-border 效果
--->
+
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- 底层：整体填充深色 -->
+    
     <item>
         <shape android:shape="rectangle">
             <solid android:color="#13132A" />
         </shape>
     </item>
-    <!-- 顶层：仅保留底部 1dp，其余裁掉，形成描边 -->
+    
     <item
         android:top="-2dp"
         android:left="-2dp"

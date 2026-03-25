@@ -36,7 +36,7 @@
             android:paddingTop="24dp"
             android:paddingBottom="40dp">
 
-            <!-- ══ 服务器配置 ════════════════════════════════════════════════ -->
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
                 android:padding="16dp"
                 android:layout_marginBottom="24dp">
 
-                <!-- Gateway URL label -->
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <!-- hintEnabled=false 完全关闭浮动标签 -->
+                    
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                         android:visibility="gone" />
                 </LinearLayout>
 
-                <!-- Token label -->
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- 模型 label -->
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
 
                 </LinearLayout>
 
-                <!-- 打开控制台 -->
+                
                 <TextView
                     android:id="@+id/btnOpenConsole"
                     android:layout_width="match_parent"
@@ -198,7 +198,7 @@
 
             </LinearLayout>
 
-            <!-- ══ 设备信息 ══════════════════════════════════════════════════ -->
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -272,7 +272,7 @@
 
             </LinearLayout>
 
-            <!-- 保存按钮 -->
+            
             <TextView
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"

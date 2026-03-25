@@ -18,17 +18,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * 对话持久化存储
- * 每条对话保存为 getFilesDir()/convs/{id}.json
- */
+
 public class ConversationStore {
 
     private static final String TAG    = "ConvStore";
     private static final String DIR    = "convs";
     private static final int    MAX_CONVS = 100; // 最多保留100条历史
 
-    // ── 对话摘要（列表页用）─────────────────────────────────────────────────
     public static class ConvSummary {
         public final String id;
         public final String title;
@@ -42,7 +38,7 @@ public class ConversationStore {
             this.msgCount  = msgCount;
         }
 
-        /** 格式化时间显示 */
+        
         public String timeLabel() {
             long diff = System.currentTimeMillis() - updatedAt;
             if (diff < 60_000)              return "刚刚";
@@ -53,18 +49,15 @@ public class ConversationStore {
         }
     }
 
-    // ── 获取存储目录 ─────────────────────────────────────────────────────────
     private static File dir(Context ctx) {
         File d = new File(ctx.getFilesDir(), DIR);
         if (!d.exists()) d.mkdirs();
         return d;
     }
 
-    // ── 保存对话 ─────────────────────────────────────────────────────────────
     public static void save(Context ctx, String convId, List<Message> messages) {
         if (messages.isEmpty()) return;
         try {
-            // 标题：取第一条用户消息，截取前40字符
             String title = "";
             for (Message m : messages) {
                 if (m.isUser() && !m.getContent().isEmpty()) {
@@ -102,7 +95,6 @@ public class ConversationStore {
         }
     }
 
-    // ── 加载所有对话摘要（按更新时间倒序）───────────────────────────────────
     public static List<ConvSummary> loadAll(Context ctx) {
         List<ConvSummary> list = new ArrayList<>();
         File d = dir(ctx);
@@ -127,7 +119,6 @@ public class ConversationStore {
         return list;
     }
 
-    // ── 加载单条对话的消息列表 ───────────────────────────────────────────────
     public static List<Message> loadMessages(Context ctx, String convId) {
         List<Message> msgs = new ArrayList<>();
         File file = new File(dir(ctx), convId + ".json");
@@ -149,12 +140,10 @@ public class ConversationStore {
         return msgs;
     }
 
-    // ── 删除单条对话 ─────────────────────────────────────────────────────────
     public static void delete(Context ctx, String convId) {
         new File(dir(ctx), convId + ".json").delete();
     }
 
-    // ── 超过最大数量时删除最旧的 ─────────────────────────────────────────────
     private static void pruneOldConversations(Context ctx) {
         File d = dir(ctx);
         File[] files = d.listFiles((f, name) -> name.endsWith(".json"));

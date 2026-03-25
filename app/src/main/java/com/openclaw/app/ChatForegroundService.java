@@ -13,13 +13,7 @@ import android.os.PowerManager;
 
 import androidx.core.app.NotificationCompat;
 
-/**
- * 前台 Service：在 AI 回复流式传输期间运行，防止系统因 App 进后台而杀死进程和 WebSocket。
- *
- * 用法：
- *   ChatForegroundService.start(context);   // 开始流式前调用
- *   ChatForegroundService.stop(context);    // 流式完成/出错后调用
- */
+
 public class ChatForegroundService extends Service {
 
     private static final String CHANNEL_ID   = "oc_streaming";
@@ -29,7 +23,6 @@ public class ChatForegroundService extends Service {
 
     private PowerManager.WakeLock wakeLock;
 
-    // ── 静态便捷方法 ──────────────────────────────────────────────────────────
 
     public static void start(Context ctx) {
         Intent i = new Intent(ctx, ChatForegroundService.class);
@@ -47,7 +40,6 @@ public class ChatForegroundService extends Service {
         ctx.startService(i);
     }
 
-    // ── 生命周期 ──────────────────────────────────────────────────────────────
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -75,7 +67,6 @@ public class ChatForegroundService extends Service {
         super.onDestroy();
     }
 
-    // ── 通知 ──────────────────────────────────────────────────────────────────
 
     private void ensureChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -90,7 +81,6 @@ public class ChatForegroundService extends Service {
     }
 
     private Notification buildNotification(String text) {
-        // 点击通知跳回 App
         Intent back = new Intent(this, MainActivity.class);
         back.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pi = PendingIntent.getActivity(
@@ -109,7 +99,6 @@ public class ChatForegroundService extends Service {
             .build();
     }
 
-    // ── 唤醒锁：防止 CPU 休眠导致 WebSocket 断连 ─────────────────────────────
 
     private void acquireWakeLock() {
         if (wakeLock != null && wakeLock.isHeld()) return;

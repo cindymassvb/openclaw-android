@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- 纯深色 App，night 与 default 完全一致 -->
+    
     <style name="Base.Theme.Openclaw" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/accent_purple</item>
         <item name="colorPrimaryVariant">@color/accent_purple_dim</item>

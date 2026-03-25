@@ -58,7 +58,6 @@ public class HistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // ── Adapter ──────────────────────────────────────────────────────────────
     private class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.VH> {
 
         @Override
@@ -73,7 +72,6 @@ public class HistoryActivity extends AppCompatActivity {
             h.tvTitle.setText(s.title);
             h.tvTime.setText(s.timeLabel() + " · " + s.msgCount + " 条消息");
 
-            // 点击加载对话
             h.itemView.setOnClickListener(v -> {
                 Intent i = new Intent(HistoryActivity.this, MainActivity.class);
                 i.putExtra(EXTRA_CONV_ID, s.id);
@@ -82,7 +80,6 @@ public class HistoryActivity extends AppCompatActivity {
                 finish();
             });
 
-            // 删除
             h.btnDelete.setOnClickListener(v ->
                 new AlertDialog.Builder(HistoryActivity.this)
                     .setMessage("删除这条对话？")

@@ -4,7 +4,6 @@
         etMessage.setEnabled(!streaming);
         btnAttach.setEnabled(!streaming);
 
-        // ★ 流式期间启动前台 Service，防止系统在后台杀死进程和 WebSocket
         if (streaming) {
             ChatForegroundService.start(this);
         } else {
