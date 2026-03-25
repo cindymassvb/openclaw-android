@@ -61,3 +61,11 @@ Android chat app that talks to an OpenClaw-compatible server over WebSocket, sup
 
 ## License
 Not specified yet. If you plan to distribute, add an OSI license (e.g., MIT/Apache-2.0).
+
+## Security & compliance notes (please review before public release)
+- TLS trust: current `ApiClient` installs a trust-all `X509TrustManager` and disables hostname verification to ease self-signed testing. For production, switch back to system trust anchors and enable hostname checks to avoid MITM.
+- Cleartext: `network_security_config` only permits HTTP for private LAN ranges (10.x/192.168.x/localhost); public domains remain HTTPS-only. Keep it that way for production.
+- Secrets: `HARDCODED_SEED` is intentionally empty; do not commit real seeds or API tokens. Prefer runtime config or env/remote config.
+- Privacy: the client stores history locally and does not upload it. If your server logs conversations, disclose that in your privacy policy and comply with data retention/consent requirements.
+- Third-party licenses: include notices for OkHttp, Markwon, BouncyCastle, AndroidX (Apache-2.0/MIT family). Add a project license (MIT/Apache-2.0 recommended) before public release or app store submission.
+- Store listing/DSR: if publishing (e.g., Play Store), provide a Privacy Policy URL and fill Data Safety accordingly (collects text input if you log server-side).
